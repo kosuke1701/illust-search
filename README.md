@@ -18,4 +18,4 @@
     
 ## pixiv顔検索
 
-[Notebookを開く](https://colab.research.google.com/github/kosuke1701/illust-search/edit/master/face_search.ipynb)
+[Notebookを開く](https://colab.research.google.com/github/kosuke1701/illust-search/blob/master/face_search.ipynb)
