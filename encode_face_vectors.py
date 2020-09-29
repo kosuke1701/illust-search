@@ -16,10 +16,12 @@ from PIL import Image, ImageFile
 Image.MAX_IMAGE_PIXELS = 1000000000
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
-#
-# Store numpy array in sqlite3. 
+# Following codes which define `array` type in sqlite3 is copied from the following Stack Overflow:
 # https://stackoverflow.com/questions/18621513
-#
+# question by:
+# Joe Flip (https://stackoverflow.com/users/1715453/joe-flip)
+# answered by:
+# unutbu (https://stackoverflow.com/users/190597/unutbu)
 def adapt_array(arr):
     """
     http://stackoverflow.com/a/31312102/190597 (SoulNibbler)
@@ -28,12 +30,10 @@ def adapt_array(arr):
     np.save(out, arr)
     out.seek(0)
     return sqlite3.Binary(out.read())
-
 def convert_array(text):
     out = io.BytesIO(text)
     out.seek(0)
     return np.load(out)
-
 # Converts np.array to TEXT when inserting
 sqlite3.register_adapter(np.ndarray, adapt_array)
 # Converts TEXT to np.array when selecting
@@ -100,7 +100,8 @@ if __name__=="__main__":
                 identifier.encode_image([target_img], target_bbox)
             
             for i_emb, i_bbox in enumerate(target_i_bbox):
-                x_min, y_min, x_max, y_max = target_bbox[0][i_bbox]["coordinates"]
+                x_min, y_min, x_max, y_max = \
+                    map(int,target_bbox[0][i_bbox]["coordinates"])
 
                 emb = target_emb[i_emb].detach().cpu().numpy()
                 c.execute("INSERT INTO face (id, face, xmin, xmax, ymin, ymax, vector) \
