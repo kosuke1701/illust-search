@@ -14,6 +14,8 @@
 
     * `<TARGET>`は1列目がイラストIDで、2列目が`<ROOT_DIR>`からのイラスト画像の相対パスであるようなTSVファイル。
     * embeddingを保存したデータベースファイル`vectors.sql`が作成される。
+        - 計算済みのデータベースは以下からダウンロードできる
+        - https://github.com/kosuke1701/illust-search/releases/download/0.0/vectors.sql
     * データベース中にイラストIDが既存の画像は処理しないので、`<TARGET>`が更新された場合は単純に上記コマンドを再度実行すればよい。
     
 ## pixiv顔検索
